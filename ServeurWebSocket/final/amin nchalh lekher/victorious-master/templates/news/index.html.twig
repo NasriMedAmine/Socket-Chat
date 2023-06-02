@@ -1,0 +1,43 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block title %}News index{% endblock %}
+
+
+{%  block contenpage %}
+    <h1>News index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdNews</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>DateDebut</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news in news %}
+            <tr>
+                <td>{{ news.idNews }}</td>
+                <td>{{ news.title }}</td>
+                <td>{{ news.description }}</td>
+                <td>{{ news.dateDebut ? news.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ news.image }}</td>
+
+                <td>
+                    <a href="{{ path('app_news_delete', {'idNews': news.idNews}) }}">delete</a>
+                    <a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_news_new') }}">Create new</a>
+{% endblock %}
